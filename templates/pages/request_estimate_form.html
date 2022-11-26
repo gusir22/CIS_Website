@@ -1,0 +1,29 @@
+<!-- templates/pages/request_estimate_form.html -->
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <h1 class="display-1 text-center">Have A Project Idea?</h1>
+            <p class="text-center fs-4 fw-light">Let Us Know..</p>
+        </div>
+        <div class="col-12 py-2">
+            <!-- Contact Form Starts -->
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="form-actions">
+                    <div class="d-grid gap-2">
+                      <button class="btn btn-primary" type="submit">Request Estimate</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

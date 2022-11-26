@@ -14,6 +14,8 @@ from .views import (
     ProjectPublicSearchResultsListView,
     ContactView,
     ContactSuccessView,
+    RequestEstimatesView,
+    RequestEstimatesSuccessView,
 )
 
 
@@ -24,6 +26,8 @@ urlpatterns = [
     path('questions/', QandAView.as_view(), name='q&a'),
 
     # Contact pages
+    path('request_estimate/', RequestEstimatesView.as_view(), name='request_estimate'),
+    path('request_estimate/success/', RequestEstimatesSuccessView.as_view(), name='request_estimate_success'),
     path('contact/', ContactView.as_view(), name='contact'),
     path('contact/success/', ContactSuccessView.as_view(), name='contact_success'),
 

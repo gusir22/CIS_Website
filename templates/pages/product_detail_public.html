@@ -38,7 +38,9 @@
     </div>
 
     <div class="row pt-2">
-        <p>{{product.get_all_product_related_tags}}</p>
+        {% if user.is_authenticated and request.user.type != 'CUSTOMER' %}
+        <p>tags: {{product.get_all_product_related_tags}}</p>
+        {% endif %}
         <hr>
         <h4 class="fw-semibold">Price:</h4>
         <p>{{product.display_product_price}}</p>
@@ -46,11 +48,12 @@
         <p>{{product.pros_description}}</p>
         <h4 class="fw-semibold">Cons:</h4>
         <p>{{product.cons_description}}</p>
-        <a href="#" class="card-link pb-2">
+        <form action="{% url 'request_estimate' %}" class="card-link pb-2">
             <div class="d-grid gap-2">
-              <button class="btn btn-primary">Request Quote</button>
+              <button type="submit" name="estimate_button" value="{{product.pk}}"
+                      class="btn btn-primary">Request Estimate</button>
             </div>
-        </a>
+        </form>
         <hr>
     </div>
 
@@ -62,11 +65,12 @@
             </div>
         </a>
     </div>
+    {% if user.is_authenticated and request.user.type != 'CUSTOMER' %}
     <div class="row">
         <hr>
-        <p>!!NOTE: This part will only be visible to staff!!</p>
         <h4 class="fw-semibold">Product Notes:</h4>
         <p>{{product.notes|linebreaks}}</p>
     </div>
+    {% endif %}
 </div>
 {% endblock content %}

@@ -39,9 +39,9 @@
     </div>
 
     <div class="row pt-2">
-        <p>
-        {{project.tags}}
-        </p>
+        {% if user.is_authenticated and request.user.type != 'CUSTOMER' %}
+        <p>tags: {{project.tags}}</p>
+        {% endif %}
         <hr>
         <h4 class="fw-semibold">Products:</h4>
         <p>

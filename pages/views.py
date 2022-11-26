@@ -28,6 +28,9 @@ from projects.models import (
 )
 from accounts.models import CustomUser
 
+from .forms import (
+    RequestEstimateForm,
+)
 from emailmanager.forms import ContactForm
 
 
@@ -301,3 +304,57 @@ class ContactSuccessView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ContactSuccessView, self).get_context_data(**kwargs)
         return context
+
+
+# REQUEST QUOTES #######################################################################################################
+########################################################################################################################
+
+class RequestEstimatesView(FormView):
+    """Displays the contact page and its details"""
+    template_name = 'pages/request_estimate_form.html'
+    form_class = RequestEstimateForm
+    success_url = "request_estimate/success/"
+
+    def form_valid(self, form):
+        full_name = form.cleaned_data['full_name']
+        from_email = 'gustavo@cisfencing.com'
+        subject = f'Estimate Request - {full_name}'
+        date = datetime.now()  # Get contact request time
+        message = f"""
+                Estimate Request
+
+                Date: {date.strftime("%m/%d/%y %H:%M")}
+                ---------------------------------------------------------
+                CUSTOMER:
+                    Name: {full_name}
+                    Phone Number: {form.cleaned_data['phone_number']}
+                    Contact Email: {form.cleaned_data['contact_email']}
+                    Project Site:
+                        {form.cleaned_data['street_address']},
+                        {form.cleaned_data['city']}, Fl {form.cleaned_data['zip_code']}
+                ----------------------------------------------------------
+                DETAILS:
+                    Pool Code: {form.cleaned_data['pool_code']}
+                    Owner-Builder: {form.cleaned_data['owner_permit']}
+                    HOA: {form.cleaned_data['hoa_flag']}
+                ----------------------------------------------------------
+                PROJECT DESCRIPTION:
+                    {form.cleaned_data['message']}
+
+                """
+        send_mail(subject, message, from_email, ['gusir22@gmail.com'], fail_silently=False)
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(RequestEstimatesView, self).get_context_data(**kwargs)
+        return context
+
+
+class RequestEstimatesSuccessView(TemplateView):
+    """Displays the contact success page and its details"""
+    template_name = 'pages/request_estimate_form_success.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RequestEstimatesSuccessView, self).get_context_data(**kwargs)
+        return context
+
