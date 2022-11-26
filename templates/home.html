@@ -68,10 +68,35 @@
             </h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col text-center">
-            <p>Add about 4 random project images and a link to Products page here</p>
+    <div class="row mx-auto">
+        {% for project in project_exhibitions %}
+        <div class="col-sm-3 col-6 py-2 mx-auto">
+            <a href="{% url 'project_public_detail' project.pk %}">
+                <!-- carousel start -->
+                <div id="carousel{{project.id}}Interval" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      {% for photo in project.projectexhibitionimage_set.all %}
+                      <div class="carousel-item active ratio ratio-16x9" data-bs-interval="10000">
+                        <img src="{{photo.images.url}}" class="rounded"
+                             alt="{{project.project_name}}-{{forloop.counter}}">
+                      </div>
+                      {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{project.id}}Interval"
+                    data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{project.id}}Interval"
+                    data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <!-- carousel end -->
+            </a>
         </div>
+        {% endfor %}
     </div>
     <div class="row">
         <div class="col text-center">
@@ -92,7 +117,7 @@
         </div>
     <div class="row bg-primary">
         <div class="col text-center text-light">
-            <p>Add a model textfield with brief description here</p>
+            <p>{{ about_us_text.text|linebreaks }}</p>
         </div>
     </div>
     <!-- About Us End -->

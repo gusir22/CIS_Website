@@ -100,6 +100,18 @@ class ServiceAreas(models.Model):
         return self.area
 
 
+class AboutUsText(models.Model):
+    """Represents the home page's about us text for dynamic management"""
+    text = models.TextField()
+
+    class Meta:
+        verbose_name = "About Us Text"
+        verbose_name_plural = "About Us Text"
+
+    def __str__(self):
+        return self.text[:25]
+
+
 # TERMS AND CONDITIONS #################################################################################################
 ########################################################################################################################
 

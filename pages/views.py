@@ -13,6 +13,7 @@ from .models import (
     QandACategory,
     HomePageAnnouncements,
     ServiceAreas,
+    AboutUsText,
     TermandConditions,
     OperationBlocks,
 )
@@ -48,8 +49,21 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['announcements'] = HomePageAnnouncements.objects.all()  # Extract all announcements
-        context['service_areas'] = ServiceAreas.objects.all().order_by('area')  # Extract service areas alphabetically
+
+        # Extract all announcements
+        context['announcements'] = HomePageAnnouncements.objects.all()
+
+        # Extract service areas alphabetically
+        context['service_areas'] = ServiceAreas.objects.all().order_by('area')
+
+        # Pick 4 random project exhibitions
+        random_exhibitions = ProjectExhibition.objects.all().order_by('?')[0:4]
+        context['project_exhibitions'] = random_exhibitions
+
+        # Extract about us text info
+        about_us_text = AboutUsText.objects.first()
+        context['about_us_text'] = about_us_text
+
         return context
 
 

@@ -56,6 +56,11 @@
 
     <div class="row">
         <p>{{product.description|linebreaks}}</p>
+        <a href="{% url 'products_public_list' %}" class="card-link pb-2">
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-primary">See More Products</button>
+            </div>
+        </a>
     </div>
     <div class="row">
         <hr>

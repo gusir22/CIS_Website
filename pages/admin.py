@@ -5,6 +5,7 @@ from .models import (
     QandACategory,
     HomePageAnnouncements,
     ServiceAreas,
+    AboutUsText,
     TermandConditions,
     OperationBlocks,
 )
@@ -54,6 +55,16 @@ class ServiceAreaAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ServiceAreas, ServiceAreaAdmin)
+
+
+class AboutUsTextAdmin(admin.ModelAdmin):
+    model = AboutUsText
+    list_display = [
+        '__str__',
+    ]
+
+
+admin.site.register(AboutUsText, AboutUsTextAdmin)
 
 
 # TERMS AND CONDITIONS #################################################################################################
