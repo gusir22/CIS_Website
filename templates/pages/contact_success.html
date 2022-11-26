@@ -1,0 +1,72 @@
+<!-- templates/pages/contact_success.html -->
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Contact Success{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <h1 class="display-1 text-center">Contact Success</h1>
+        </div>
+    </div>
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <p class="text-center">Thank you for reaching out to us! A member of our team will be in contact with
+            you within no later than 2-3 business days.</p>
+        </div>
+    </div>
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <p class="text-center">While you wait, please check out our website!</p>
+            <p class="text-center">You can...</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="{% url 'project_public_gallery' %}">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary">See Our Projects</button>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row pt-1">
+        <div class="col-12 text-center">
+            <a href="{% url 'products_public_list' %}">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary">See Our Selection Of Products</button>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row pt-1">
+        <div class="col-12 text-center">
+            <a href="{% url 'home' %}">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary">Start At The Home Page</button>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row pt-1">
+        <div class="col-12 text-center">
+            <a href="{% url 'q&a' %}">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary">Browse Frequently Asked Questions</button>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row pt-1">
+        <div class="col-12 text-center">
+            <a href="{% url 'terms_and_conditions' %}">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary">Read Our Terms & Conditions</button>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

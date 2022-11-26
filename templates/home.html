@@ -1,0 +1,100 @@
+<!-- templates/home.html -->
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Construction Integrated Services{% endblock title %}
+
+{% block content %}
+    <div class="container">
+    <!-- Announcements/Promotions Start -->
+    <div class="row pt-3">
+        <div class="col-12 mx-auto mt-5">
+            <!-- carousel start -->
+            <div id="carouselInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  {% for announcement in announcements %}
+                  <div class="carousel-item active ratio ratio-16x9" data-bs-interval="10000">
+                    <img src="{{announcement.announcement.url}}" class="rounded"
+                         style="max-height:80%;" alt="{{announcement.title}}">
+                  </div>
+                  {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselInterval"
+                data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselInterval"
+                data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <!-- carousel end -->
+        </div>
+    </div>
+    <!-- Announcements/Promotions End -->
+    </div>
+
+    <!-- Service Area Start -->
+    <div class="row pb-3 bg-primary">
+        <div class="col-12 pt-2">
+            <h1 class="display-6 text-light text-center">
+                Service Areas
+                <i class="bi bi-map"></i>
+            </h1>
+        </div>
+    </div>
+    <div class="row pt-2 bg-primary">
+        {% for service_area in service_areas %}
+        <div class="col-12 col-md-3 mx-auto">
+            <div class="card border border-0" >
+              <img src="{{service_area.banner.url}}" class="card-img-top" alt="{{service_area.area}}">
+              <div class="card-body bg-primary">
+                <p class="card-text text-center text-light">{{service_area.get_service_type_display}}</p>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Service Area End -->
+
+    <!-- Project Gallery Start -->
+    <div class="row pt-3 pb-3">
+        <div class="col-12">
+            <h1 class="display-6 text-center">
+                <i class="bi bi-hammer"></i>
+                Project Gallery
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <p>Add about 4 random project images and a link to Products page here</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <p>See more at <i class="bi bi-instagram"></i>
+                <a href="https://www.instagram.com/constructionintegratedservices/?hl=en" target="_blank">
+                    @ConstructionIntegratedServices</a></p>
+        </div>
+    </div>
+    <!-- Project Gallery End -->
+
+    <!-- About Us Start -->
+    <div class="row pt-3 pb-3 bg-primary">
+        <div class="col-12 pt-2">
+            <h1 class="display-6 text-center text-light">
+                About Us
+                <i class="bi bi-file-person"></i>
+            </h1></div>
+        </div>
+    <div class="row bg-primary">
+        <div class="col text-center text-light">
+            <p>Add a model textfield with brief description here</p>
+        </div>
+    </div>
+    <!-- About Us End -->
+
+{% endblock content %}

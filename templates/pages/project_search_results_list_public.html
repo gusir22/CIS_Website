@@ -1,0 +1,71 @@
+<!-- templates/pages/project_gallery_public.html -->
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}{{q|title}} Projects{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <h1 class="display-1 text-center">{{q|title}} Projects</h1>
+            <h6 class="text-center"></h6>
+        </div>
+    </div>
+    <div class="row py-2">
+        <form class="d-flex" action="{% url 'project_public_search_results_list' %}" method="get">
+            <input class="form-control me-2" type="search" name="q" value="{{q}}"
+                   aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="row mx-auto">
+        {% for project in project_exhibitions %}
+        <div class="col-sm-3 col-6 py-2 mx-auto">
+            <a href="{% url 'project_public_detail' project.pk %}">
+                <!-- carousel start -->
+                <div id="carousel{{project.id}}Interval" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      {% for photo in project.projectexhibitionimage_set.all %}
+                      <div class="carousel-item active ratio ratio-16x9" data-bs-interval="10000">
+                        <img src="{{photo.images.url}}" class="rounded"
+                             alt="{{project.project_name}}-{{forloop.counter}}">
+                      </div>
+                      {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{project.id}}Interval"
+                    data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{project.id}}Interval"
+                    data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <!-- carousel end -->
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="{% url 'project_public_gallery' %}">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary">See More Projects</button>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row pt-1">
+        <div class="col-12 text-center">
+            <a href="{% url 'products_public_list' %}">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary">See Our Selection of Products</button>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

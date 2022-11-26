@@ -1,0 +1,106 @@
+<!-- templates/pages/products_list_public.html -->
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Products{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <h1 class="display-1 text-center">Products</h1>
+        </div>
+    </div>
+    <div class="row py-2">
+        <form class="d-flex" action="{% url 'product_public_search_results_list' %}" method="get">
+            <input class="form-control me-2" type="search" name="q"
+                   placeholder="Search Our Products.."
+                   aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+    </div>
+    {% for catalog_entry in product_catalog %}
+        <div class="row pb-5">
+            <div class="row">
+                <h1 class="fw-bold ">{{catalog_entry.category}}</h1>
+                <p>{{catalog_entry.category.description}}</p>
+                <hr>
+            </div>
+            {% for product_listing in catalog_entry.product_lines %}
+            <div class="row">
+                <div class="col-12">
+                    <h4>{{product_listing.style}}</h4>
+                </div>
+                {% for product in product_listing.products %}
+                <div class="row mx-auto">
+                    <div class="col-12 pb-2">
+                        <div class="card bg-light" >
+                            <div class="card-body">
+                                <!-- carousel start -->
+                                <div id="carousel{{product.id}}Interval" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                      {% for photo in product.productimage_set.all %}
+                                      <div class="carousel-item active ratio ratio-16x9" data-bs-interval="10000">
+                                        <img src="{{photo.images.url}}" class="rounded"
+                                             alt="{{product.name}}-{{forloop.counter}}">
+                                      </div>
+                                      {% endfor %}
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{product.id}}Interval"
+                                    data-bs-slide="prev">
+                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{product.id}}Interval"
+                                    data-bs-slide="next">
+                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                                <!-- carousel end -->
+                                <div class="container pt-1">
+                                    <div class="row">
+                                        <div class="col-12 text-start">
+                                            <h5 class="card-title">{{product.name}} {{product.category_name_singular}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 text-start">
+                                            <a href="{% url 'product_public_detail' product.pk %}"
+                                            class="card-link">
+                                                <div class="d-grid gap-2">
+                                                  <button class="btn btn-primary">Learn More</button>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-sm-6 text-end">
+                                            <a href="#" class="card-link">
+                                                <div class="d-grid gap-2">
+                                                  <button class="btn btn-outline-primary">Request Quote</button>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <a href="{% url 'project_public_gallery' %}">
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary">See Our Projects</button>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock content %}

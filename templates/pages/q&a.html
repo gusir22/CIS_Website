@@ -1,0 +1,43 @@
+<!-- templates/pages/q&a.html -->
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Q&A{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <h1 class="display-1 text-center">Questions & Answers</h1>
+        </div>
+    </div>
+    {% for topic in topics %}
+    <div class="row pt-4">
+        {% for category, entry_list in topic.items %}
+            <div class="col-12">
+                <h3>{{ category }}</h3>
+            </div>
+            <div class="col-12">
+                <div class="accordion accordion-flush" id="accordionFlush{{ category }}">
+                {% for entry in entry_list %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-heading{{ entry.id }}">
+                          <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#flush-collapse{{ entry.id }}" aria-expanded="false"
+                          aria-controls="flush-collapse{{ entry.id }}">
+                            <strong>{{ entry.question }}</strong>
+                          </button>
+                        </h2>
+                        <div id="flush-collapse{{ entry.id }}" class="accordion-collapse collapse"
+                        aria-labelledby="flush-heading{{ entry.id }}" data-bs-parent="#accordionFlush{{ category }}">
+                          <div class="accordion-body">{{ entry.answer }}</div>
+                        </div>
+                      </div>
+                {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

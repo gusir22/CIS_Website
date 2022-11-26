@@ -1,0 +1,29 @@
+<!-- templates/pages/sandbox.html -->
+
+{% load static %}
+
+{% block title %}Sandbox{% endblock title %}
+
+<body class="bg-primary">
+    <a href="{% url 'home' %}">GO HOME, YOU'RE DRUNK.</a>
+
+    <!-- Block Content Start -->
+    <div class="pt-5">
+        <div class="pt-5 pb-3">
+            {% block content %}
+                {% for catalog_entry in product_catalog %}
+                    <h1>{{catalog_entry.category}}</h1>
+                    {% for product_listing in catalog_entry.product_lines %}
+                        <h3>+{{product_listing.style}}</h3>
+                        {% for product in product_listing.products %}
+                            <p>-{{product}} ({{product.display_product_price}})</p>
+                        {% endfor %}
+                    {% endfor %}
+
+                {% endfor %}
+
+            {% endblock content %}
+        </div>
+    </div>
+    <!-- Block Content End -->
+</body>

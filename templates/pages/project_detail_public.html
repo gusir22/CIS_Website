@@ -1,0 +1,98 @@
+<!-- templates/pages/project_detail_public.html -->
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Project Details{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <h1>Project Details</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <!-- carousel start -->
+              <div id="carousel{{project.id}}Interval" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    {% for photo in project.projectexhibitionimage_set.all %}
+                    <div class="carousel-item active ratio ratio-16x9" data-bs-interval="10000">
+                      <img src="{{photo.images.url}}" class="rounded"
+                           alt="{{project.project_name}}-{{forloop.counter}}">
+                    </div>
+                    {% endfor %}
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{project.id}}Interval"
+                  data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carousel{{project.id}}Interval"
+                  data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div>
+              <!-- carousel end -->
+        </div>
+    </div>
+
+    <div class="row pt-2">
+        <p>
+        {{project.tags}}
+        </p>
+        <hr>
+        <h4 class="fw-semibold">Products:</h4>
+        <p>
+            {% for product in project.projectexhibitionproducts_set.all %}
+            {% if forloop.counter > 1 %}
+            |
+            {% endif %}
+            <a href="{% url 'product_public_detail' product.products.pk %}">
+                {{product.products.display_formal_product_name}}
+            </a>
+            {% endfor %}
+        </p>
+        <h4 class="fw-semibold">Project Type:</h4>
+        <p>{{project.project.get_type_display}}</p>
+        <hr>
+    </div>
+
+    {% for testimony in project.projectexhibitiontestimonials_set.all %}
+    {% if not testimony.hide_testimonial %}
+    <div class="row">
+        <figure class="text-center">
+            <blockquote class="blockquote">
+              <p>"{{testimony.testimonial}}"</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                {{testimony.author}}
+                {% for i in testimony.star_rating_range %}
+                    <i class="bi bi-star-fill"></i>
+                {% endfor %}
+            </figcaption>
+        </figure>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<div class="row">
+        <div class="col-12 text-center">
+            <a href="{% url 'project_public_gallery' %}">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary">See More Projects</button>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row pt-1">
+        <div class="col-12 text-center">
+            <a href="{% url 'products_public_list' %}">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary">See Our Selection of Products</button>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock content %}

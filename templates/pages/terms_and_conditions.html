@@ -1,0 +1,25 @@
+<!-- templates/pages/terms_and_conditions.html -->
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Terms & Conditions{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <h1 class="display-1 text-center">Terms and Conditions</h1>
+        </div>
+    </div>
+    {% for section in sections %}
+    <div class="row mx-">
+        <div class="col-2"></div>
+        <div class="col-12 col-sm-8">
+            <h1>{{section.section_number}}-{{section.section_name}}</h1>
+            <p>{{section.section_tc|linebreaks}}</p>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

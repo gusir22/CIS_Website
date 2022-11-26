@@ -1,0 +1,180 @@
+<!-- templates/pages/contact.html -->
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <h1 class="display-1 text-center">Contact Us</h1>
+        </div>
+        <div class="col-12 py-2">
+            <!-- Contact Form Starts -->
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="form-actions">
+                    <div class="d-grid gap-2">
+                      <button class="btn btn-primary" type="submit">Send Us A Message</button>
+                    </div>
+                </div>
+    <div class="row py-2">
+        <div class="col-12 py-2">
+            <h1 class="display-1 text-center">Information</h1>
+        </div>
+        <div class="col-12">
+            <p class="text-center fw-semibold"><i class="bi bi-geo-alt"></i>
+              12515 Orange Dr, Suite 803, Davie, Fl 33330</p>
+        </div>
+        <div class="col-12">
+            <p class="text-center fw-semibold"><i class="bi bi-envelope"></i>  contact@cisfencing.com</p>
+        </div>
+        <div class="col-12">
+            <p class="text-center fw-semibold"><i class="bi bi-telephone"></i>  954-275-5711</p>
+        </div>
+    </div>
+    <div class="row pb-2">
+        <div class="col-12">
+            <div class="col-12 py-2">
+                <h1 class="display-1 text-center">Hours</h1>
+            </div>
+            {% for day_schedule in operation_schedule %}
+            <p class="text-center fw-semibold">{{ day_schedule.day }} <null class="fw-lighter">{{ day_schedule.hours_format_display }}</null></p>
+            {% endfor %}
+        </div>
+    </div>
+    {% if team_flag %}
+    <div class="row pb-2">
+        <div class="col-12 py-2">
+            <h1 class="display-1 text-center">Meet The Team</h1>
+        </div>
+        {% if admin_members %}
+        <div class="col-12 py-2">
+            <hr>
+            <h1 class="display-5 text-center">Administration</h1>
+        </div>
+        {% for admin in admin_members %}
+        <div class="col-12 col-md-3 mx-auto pt-2">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ admin.administrationmore.photo.url }}" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ admin.full_name }}</h5>
+                    <p class="card-text">Administrator</p>
+                </div>
+                {% if admin.administrationmore.available_to_public %}
+                <ul class="list-group list-group-flush text-center">
+                    {% if admin.email %}
+                    <li class="list-group-item">{{ admin.email }}</li>
+                    {% endif %}
+                    {% if admin.phone_number %}
+                    <li class="list-group-item">{{ admin.phone_number }}</li>
+                    {% endif %}
+                </ul>
+                {% else %}
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item">Available By Request</li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if staff_members %}
+        <div class="col-12 py-2">
+            <hr>
+            <h1 class="display-5 text-center">Office Staff</h1>
+        </div>
+        {% for staff in staff_members %}
+        <div class="col-12 col-md-3 mx-auto pt-2">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ staff.staffmore.photo.url }}" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ staff.full_name }}</h5>
+                    <p class="card-text">{{ staff.staffmore.get_staff_type_display }}</p>
+                </div>
+                {% if staff.staffmore.available_to_public %}
+                <ul class="list-group list-group-flush text-center">
+                    {% if staff.email %}
+                    <li class="list-group-item">{{ staff.email }}</li>
+                    {% endif %}
+                    {% if staff.phone_number %}
+                    <li class="list-group-item">{{ staff.phone_number }}</li>
+                    {% endif %}
+                </ul>
+                {% else %}
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item">Available By Request</li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if sales_members %}
+        <div class="col-12 py-2">
+            <hr>
+            <h1 class="display-5 text-center">Sales Team</h1>
+        </div>
+        {% for sales in sales_members %}
+        <div class="col-12 col-md-3 mx-auto pt-2">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ sales.salesmore.photo.url }}" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ sales.full_name }}</h5>
+                    <p class="card-text">{{ sales.salesmore.get_sales_type_display }}</p>
+                </div>
+                {% if sales.salesmore.available_to_public %}
+                <ul class="list-group list-group-flush text-center">
+                    {% if sales.email %}
+                    <li class="list-group-item">{{ sales.email }}</li>
+                    {% endif %}
+                    {% if sales.phone_number %}
+                    <li class="list-group-item">{{ sales.phone_number }}</li>
+                    {% endif %}
+                </ul>
+                {% else %}
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item">Available By Request</li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if construction_members %}
+        <div class="col-12 py-2">
+            <hr>
+            <h1 class="display-5 text-center">Construction Crew</h1>
+        </div>
+        {% for construction in construction_members %}
+        <div class="col-12 col-md-3 mx-auto pt-2">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ construction.constructionmore.photo.url }}" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ construction.full_name }}</h5>
+                    <p class="card-text">{{ construction.constructionmore.get_construction_type_display }}</p>
+                </div>
+                {% if construction.constructionmore.available_to_public %}
+                <ul class="list-group list-group-flush text-center">
+                    {% if construction.email %}
+                    <li class="list-group-item">{{ construction.email }}</li>
+                    {% endif %}
+                    {% if construction.phone_number %}
+                    <li class="list-group-item">{{ construction.phone_number }}</li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+
+
+{% endblock content %}
