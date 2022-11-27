@@ -269,7 +269,7 @@ class ContactView(FormView):
                 {form.cleaned_data['message']}
 
                 """
-        send_mail(subject, message, from_email, ['gusir22@gmail.com'], fail_silently=False)
+        send_mail(subject, message, from_email, ['contact@cisfencing.com'], fail_silently=False)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -341,7 +341,7 @@ class RequestEstimatesView(FormView):
                     {form.cleaned_data['project_description']}
 
                 """
-        send_mail(subject, message, from_email, ['gusir22@gmail.com'], fail_silently=False)
+        send_mail(subject, message, from_email, ['contact@cisfencing.com'], fail_silently=False)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
