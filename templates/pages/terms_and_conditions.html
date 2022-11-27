@@ -5,21 +5,31 @@
 {% block title %}Terms & Conditions{% endblock title %}
 
 {% block content %}
-<div class="container">
+<div class="container mx-auto">
     <div class="row pb-2">
         <div class="col-12 py-2">
             <h1 class="display-1 text-center">Terms and Conditions</h1>
         </div>
     </div>
-    {% for section in sections %}
-    <div class="row mx-">
-        <div class="col-2"></div>
-        <div class="col-12 col-sm-8">
-            <h1>{{section.section_number}}-{{section.section_name}}</h1>
-            <p>{{section.section_tc|linebreaks}}</p>
+    <div class="accordion" id="accordionPanelsStayOpen">
+        {% for section in sections %}
+        <div class="accordion-item py-1">
+            <h2 class="accordion-header" id="panelsStayOpen-heading{{section.section_number}}">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapse{{section.section_number}}" aria-expanded="true"
+                  aria-controls="panelsStayOpen-collapse{{section.section_number}}">
+                    {{section.section_number}}-{{section.section_name}}
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapse{{section.section_number}}" class="accordion-collapse collapse"
+             aria-labelledby="panelsStayOpen-heading{{section.section_number}}">
+                <div class="accordion-body">
+                    <p>{{section.section_tc|linebreaks}}</p>
+                </div>
+            </div>
         </div>
-        <div class="col-2"></div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+
+
 {% endblock content %}
