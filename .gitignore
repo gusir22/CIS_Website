@@ -3,5 +3,3 @@ __pycache__/
 db.sqlite3
 docker-compose.yml
 docker-compose-prod.yml
-scratch_sheet.txt
-scratch_sheet.py
