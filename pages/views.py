@@ -313,7 +313,7 @@ class RequestEstimatesView(FormView):
     """Displays the contact page and its details"""
     template_name = 'pages/request_estimate_form.html'
     form_class = RequestEstimateForm
-    success_url = "request_estimate/success/"
+    success_url = "/request_estimate/success/"
 
     def form_valid(self, form):
         full_name = form.cleaned_data['full_name']
@@ -339,7 +339,7 @@ class RequestEstimatesView(FormView):
                     HOA: {form.cleaned_data['hoa_flag']}
                 ----------------------------------------------------------
                 PROJECT DESCRIPTION:
-                    {form.cleaned_data['message']}
+                    {form.cleaned_data['project_description']}
 
                 """
         send_mail(subject, message, from_email, ['gusir22@gmail.com'], fail_silently=False)
