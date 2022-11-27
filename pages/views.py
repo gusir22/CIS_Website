@@ -29,10 +29,9 @@ from projects.models import (
 from accounts.models import CustomUser
 
 from .forms import (
+    ContactForm,
     RequestEstimateForm,
 )
-from emailmanager.forms import ContactForm
-
 
 class SandboxView(TemplateView):
     """Used to try concepts in a clean slate. This view should be deleted when pushed to live production"""
