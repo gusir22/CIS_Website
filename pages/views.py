@@ -252,7 +252,7 @@ class ContactView(FormView):
     success_url = "/contact/success/"
 
     def form_valid(self, form):
-        subject = f"{form.cleaned_data['subject']}"
+        subject = f"Contact Request: {form.cleaned_data['subject']}"
         from_email = 'gustavo@cisfencing.com'
         date = datetime.now()  # Get contact request time
         message = f"""
@@ -263,7 +263,6 @@ class ContactView(FormView):
                 Name: {form.cleaned_data['full_name']}
                 Phone Number: {form.cleaned_data['phone_number']}
                 Contact Email: {form.cleaned_data['contact_email']}
-                Subject: {subject}
                 ----------------------------------------------------------
                 
                 {form.cleaned_data['message']}
