@@ -33,6 +33,7 @@ DEBUG = env.bool('DJANGO_DEBUG', default=False)
 ALLOWED_HOSTS = [
     'cis-staging.herokuapp.com',
     'ciswebsite.herokuapp.com',
+    'www.constructionintegratedservices.com',
     'constructionintegratedservices.com',
     'localhost',
     '127.0.0.1'
